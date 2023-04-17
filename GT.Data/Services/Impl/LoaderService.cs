@@ -13,6 +13,7 @@ public class LoaderService : ILoaderService
         _dataContext = currencyContext ?? throw new ArgumentNullException(nameof(currencyContext));
     }
 
+    /// <inheritdoc />
     public async Task<IEnumerable<Currency>?> AddCurrencies(IEnumerable<string> currencies)
     {
         if (_dataContext.Currencies is null)
@@ -36,6 +37,7 @@ public class LoaderService : ILoaderService
         return _dataContext.Currencies.Where(cur => currenciesToAdd.Any(currencyName => currencyName == cur.Name));
     }
 
+    /// <inheritdoc />
     public async Task AddPrices(IEnumerable<Price> prices)
     {
         var existedPrices = (await _dataContext.Prices!.ToListAsync())

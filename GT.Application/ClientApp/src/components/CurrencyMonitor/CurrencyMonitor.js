@@ -18,7 +18,7 @@ export function CurrencyMonitor(props) {
           if (selectedCurrency && selectedDate) {
             try {
               const response = await fetch(
-                  `weatherforecast/currency?currencyId=${selectedCurrency.id}&date=${formattedDate}`)
+                  `currency/currency?currencyId=${selectedCurrency.id}&date=${formattedDate}`)
               if (response.status === 204) {
                 alert('No data!')
                 return

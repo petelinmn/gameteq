@@ -18,30 +18,20 @@ public class Executor
     public async Task Execute(int? year = null)
     {
         using var httpClient = new HttpClient();
-        try
+        year ??= DateTime.Now.Year;
+        var url = $"{_sourceOptions.Url}?year={year}";
+        var response = await httpClient.GetAsync(url);
+
+        var responseContent = await response.Content.ReadAsStringAsync();
+
+        var lineBlocks = responseContent
+            .Split("Date|").Where(i => !string.IsNullOrEmpty(i))
+            .ToArray();
+
+        foreach (var lineBlock in lineBlocks)
         {
-            year ??= DateTime.Now.Year;
-            var url = $"{_sourceOptions.Url}?year={year}";
-            var response = await httpClient.GetAsync(url);
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var lineBlocks = responseContent
-                .Split("Date|").Where(i => !string.IsNullOrEmpty(i))
-                .ToArray();
-
-            foreach (var lineBlock in lineBlocks)
-            {
-                await ParseLinesBlock(lineBlock);
-            }
+            await ParseLinesBlock(lineBlock);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-
-        Console.WriteLine("Execute ");
     }
 
     private async Task ParseLinesBlock(string linesBlock)

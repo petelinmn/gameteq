@@ -14,16 +14,13 @@ public class DataReaderService : IDataReaderService
         _dataContext = currencyContext ?? throw new ArgumentNullException(nameof(currencyContext));
     }
 
+    /// <inheritdoc />
     public async Task<IEnumerable<Currency>> GetCurrencies() =>
         await _dataContext.Currencies!.ToListAsync();
 
-    public async Task<Price?> GetPrice(int currencyId, DateTime date) =>
-        await _dataContext!.Prices!.Where(p => p.CurrencyId == currencyId && p.Date <= date).OrderDescending().FirstOrDefaultAsync();
-
+    /// <inheritdoc />
     public async Task<Currency?> GetCurrency(int currencyId, DateTime date)
     {
-        _dataContext.ChangeTracker.DetectChanges();
-        Console.WriteLine(_dataContext.ChangeTracker.DebugView.LongView);
         return await _dataContext.Currencies!
             .Include(currency =>
                 currency.Prices!
@@ -31,5 +28,4 @@ public class DataReaderService : IDataReaderService
                     .OrderByDescending(c => c.Date).Take(1))
             .FirstOrDefaultAsync(c => c.Id == currencyId);
     }
-        
 }

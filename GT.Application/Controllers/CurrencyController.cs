@@ -6,12 +6,12 @@ namespace GT.Application.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class CurrencyController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<CurrencyController> _logger;
     private readonly IDataReaderService _dataReaderService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,
+    public CurrencyController(ILogger<CurrencyController> logger,
         IDataReaderService dataReaderService)
     {
         _logger = logger;
@@ -27,9 +27,4 @@ public class WeatherForecastController : ControllerBase
     [Route("all")]
     public async Task<IEnumerable<Currency>> GetAll() =>
         await _dataReaderService.GetCurrencies();
-
-    [HttpGet]
-    [Route("price")]
-    public async Task<Price?> GetPrice(int currencyId, DateTime date) =>
-        await _dataReaderService.GetPrice(currencyId, date);
 }

@@ -7,7 +7,7 @@ export function CurrencyList(props) {
 
     useEffect(() => {
         (async function fetchCurrencies() {
-            const response = await fetch('weatherforecast/all')
+            const response = await fetch('currency/all')
             const currencies = await response.json()
             setCurrencies(currencies)
         })();
