@@ -2,9 +2,10 @@
 
 public class Price
 {
-    public int PriceId { get; set; }
+    public int Id { get; set; }
     public decimal Value { get; set; }
 
+    public DateTime Date { get; set; }
+
     public int CurrencyId { get; set; }
-    public Currency? Currency { get; set; }
 }

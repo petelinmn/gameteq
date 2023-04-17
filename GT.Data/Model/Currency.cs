@@ -2,8 +2,8 @@
 
 public class Currency
 {
-    public int CurrencyId { get; set; }
-    public string? Name { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     public List<Price>? Prices { get; set; }
 }

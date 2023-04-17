@@ -1,0 +1,40 @@
+
+.list-group-currencies {
+    width: 200px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    border: 1px solid gray;
+    height: 100%;
+}
+
+.list-group-item:hover {
+    background: lightgrey;
+}
+
+.list-group-item.selected {
+    background: lightblue;
+}
+
+.list-group-item.selected:hover {
+    background: cornflowerblue;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
